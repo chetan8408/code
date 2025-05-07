@@ -55,31 +55,29 @@ if __name__ == "__main__":
 22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
 
 
-#include <iostream>
-using namespace std;
-string encrypt(string text, int shift) {
-    for (char &c : text) {
-        if (islower(c)) c = (c - 'a' + shift) % 26 + 'a';
-        else if (isupper(c)) c = (c - 'A' + shift) % 26 + 'A';
-    }
-    return text;
-}
-string decrypt(string text, int shift) {
-    return encrypt(text, 26 - shift);
-}
-int main() {
-    string message;
-    int shift;
-    cout << "Enter a message to encrypt: ";
-    getline(cin, message);
-    cout << "Enter shift value: ";
-    cin >> shift;
-    string encryptedMessage = encrypt(message, shift);
-    cout << "Encrypted message: " << encryptedMessage << endl;
-    cout << "Decrypted message: " << decrypt(encryptedMessage, shift) << endl;
+def encrypt(text, shift):
+    result = ""
+    for c in text:
+        if c.islower():
+            result += chr((ord(c) - ord('a') + shift) % 26 + ord('a'))
+        elif c.isupper():
+            result += chr((ord(c) - ord('A') + shift) % 26 + ord('A'))
+        else:
+            result += c
+    return result
 
-    return 0;
-}
+def decrypt(text, shift):
+    return encrypt(text, 26 - shift)
+
+# Main execution
+message = input("Enter a message to encrypt: ")
+shift = int(input("Enter shift value: "))
+
+encrypted_message = encrypt(message, shift)
+print("Encrypted message:", encrypted_message)
+
+decrypted_message = decrypt(encrypted_message, shift)
+print("Decrypted message:", decrypted_message)
 
 
 33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
